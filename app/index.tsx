@@ -10,6 +10,7 @@ export default function Index() {
       }}
     >
       <Text>Edit app/index.tsx to edit this screen.</Text>
+      <Text className="bg-white, text-blue-500">Welcome to khaana</Text>
     </View>
   );
 }
