@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "kahana",
-    "slug": "kahana",
+    "name": "khaana",
+    "slug": "khaana",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "kahana",
+    "scheme": "khaana",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
