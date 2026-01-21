@@ -23,7 +23,6 @@ const HomeScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {/* 1. Search Bar */}
         <View style={styles.searchSection}>
           <View style={styles.searchWrapper}>
             <EvilIcons name="search" size={24} color="#E52B50" />
@@ -36,6 +35,7 @@ const HomeScreen = () => {
         </View>
 
         <Categories />
+
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -46,6 +46,7 @@ const HomeScreen = () => {
           <Image source={HeroImage1} style={styles.promoImage} />
           <Image source={HeroImage2} style={styles.promoImage} />
         </ScrollView>
+
         <Text style={styles.sectionTitle}>Crave it. Get it.</Text>
 
         <View style={styles.quickPicksGrid}>
@@ -105,6 +106,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 1,
     borderColor: "#E8E8E8",
+    // Standard shadow
     elevation: 2,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
