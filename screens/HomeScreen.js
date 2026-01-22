@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import {
   StyleSheet,
   View,
@@ -12,16 +12,37 @@ import {
   ScrollView,
   Dimensions,
 } from "react-native";
+import { Video, ResizeMode } from "expo-av";
 import { EvilIcons } from "@expo/vector-icons";
 import Categories from "../components/Categories";
+import HeroImage1 from "../assets/pomotionbanner/heroimage1.png";
+import HeroImage2 from "../assets/pomotionbanner/heroimage2.jpeg";
+import Banner from "../assets/banner/banner.mp4"
 
 const { width } = Dimensions.get("window");
 
 const HomeScreen = () => {
+  const video = useRef(null);
+  const [status, setStatus] = useState({});
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {/* 1. Search Bar */}
+        {/* Video Section */}
+        <View style={styles.videoSection}>
+          <Video
+            ref={video}
+            style={styles.video}
+            source={Banner}
+            resizeMode={ResizeMode.COVER}
+            shouldPlay
+            isLooping
+            isMuted
+          />
+          {/* Added a slight dark overlay to make the UI feel premium */}
+          <View style={styles.videoOverlay} />
+        </View>
+
         <View style={styles.searchSection}>
           <View style={styles.searchWrapper}>
             <EvilIcons name="search" size={24} color="#E52B50" />
@@ -33,10 +54,8 @@ const HomeScreen = () => {
           </View>
         </View>
 
-        {/* 2. Filter Component (Previously built) */}
         <Categories />
 
-        {/* 3. Promotional Banners */}
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -44,21 +63,10 @@ const HomeScreen = () => {
           decelerationRate="fast"
           contentContainerStyle={styles.bannerContainer}
         >
-          <Image
-            source={{
-              uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBjnMjX8qQb9mLh_IBBHP90SZXccv6uTa662T2Ljfp2xrvNO5IrJmgeWC-RpS_Bxkfzak&usqp=CAU",
-            }}
-            style={styles.promoImage}
-          />
-          <Image
-            source={{
-              uri: "https://cdn.businesstraveller.com/wp-content/uploads/fly-images/1002269/zomato-infinity-dining-916x516-1-916x516.jpg",
-            }}
-            style={styles.promoImage}
-          />
+          <Image source={HeroImage1} style={styles.promoImage} />
+          <Image source={HeroImage2} style={styles.promoImage} />
         </ScrollView>
 
-        {/* 4. Quick Picks Section */}
         <Text style={styles.sectionTitle}>Crave it. Get it.</Text>
 
         <View style={styles.quickPicksGrid}>
@@ -105,6 +113,20 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
+ videoSection: {
+    width: width,
+    height: 220,
+    backgroundColor: "#000",
+    overflow: 'hidden',
+  },
+ video: {
+    width: "100%",
+    height: "100%",
+  },
+  videoOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(0,0,0,0.15)',
+  },
   searchSection: {
     paddingHorizontal: 16,
     paddingVertical: 12,
@@ -118,7 +140,6 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 1,
     borderColor: "#E8E8E8",
-    // Standard shadow
     elevation: 2,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
